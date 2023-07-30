@@ -16,6 +16,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+				<section>VIDEO API</section>
 				<section>API – <u>A</u>pplication <u>P</u>rogramming <u>I</u>nterface.<br> It is a way for two or more computer programs to communicate with each other.</section>
 				<section>
 					<h2>API</h2>
@@ -30,6 +31,66 @@
 					</ul>
 				</section>
 				<section>https://developers.google.com/youtube/v3</section>
+				<section>
+					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="11-14"><script type="text/template">
+						<!DOCTYPE html>
+						<html lang="en">
+						<head>
+							<meta charset="UTF-8">
+							<meta http-equiv="X-UA-Compatible" content="IE=edge">
+							<meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<title>VIDEO API</title>
+							<link rel="stylesheet" href="./style.css">
+						</head>
+						<body>
+							<h1>VIDEO API</h1>
+							<div class="wrapper">
+
+							</div>
+							<script src="./script.js"> </script>
+						</body>
+						</html>
+					</script></code></pre>
+				</section>
+				<section>
+					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="1-3|5-12"><script type="text/template">
+						h1, h3 {
+							text-align: center;
+						}
+
+						.wrapper {
+							display: grid;
+							grid-template-columns: repeat(3, 1fr);
+							grid-gap: 20px;
+							justify-content: center;
+							margin: 0 auto;
+							max-width: 800px;
+						}
+					</script></code></pre>
+				</section>
+				<section>
+					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers="1|3|4|5|6|7|8|9-17|19"><script type="text/template">
+						const key = 'AIzaSyDOCiT2F9Jk97qW5S3OLd7ksiIAKBb5gZ4';
+
+						const getVideoAPI = async() => {
+							const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=UC578nebW2Mn-mNgjEArGZug&maxResults=10&order=date&key=${key}`;
+							const resp = await fetch(url);
+							const data = await resp.json();
+							const wrapper = document.querySelector('.wrapper')
+							const video = data.items;
+							video.forEach(element => {
+								wrapper.innerHTML += `
+								<div>
+								<iframe width="100%" height="auto" src="https://www.youtube.com/embed/${element.id.videoId}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+								<h3>${element.snippet.title}</h3>
+								</div>
+								`;
+							});
+						}
+
+						getVideoAPI();
+					</script></code></pre>
+				</section>
 			</div>
 		</div>
 
